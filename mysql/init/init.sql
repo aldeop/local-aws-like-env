@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS app_db;
+
+USE app_db;
+
+CREATE TABLE IF NOT EXISTS health (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  status VARCHAR(20),
+  checked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO health (status) VALUES ('healthy');
