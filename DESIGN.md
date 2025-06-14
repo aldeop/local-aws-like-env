@@ -19,22 +19,22 @@
 
 ## 1. Explanation of the Flow:
 
-### 1. Open https://app.localhost.
+1. Open https://app.localhost.
 
-### 2. Traefik receives the request as it's bound to ports 80 and 443 on the host machine. 
-###    It handles the TLS termination using the mkcert certificate, and redirects HTTP requests to HTTPS.
+2. Traefik receives the request as it's bound to ports 80 and 443 on the host machine. 
+   It handles the TLS termination using the mkcert certificate, and redirects HTTP requests to HTTPS.
 
-### 3. Traefik forwards the request to the Nginx container, which is listening on its internal port 80.
+3. Traefik forwards the request to the Nginx container, which is listening on its internal port 80.
 
-### 4. Request Handling:
-### 4a. (Static Files): If the request is for a static asset like a CSS file or an image, Nginx serves it directly and the request is complete.
-### 4b. (PHP Files): If the request is for a .php file, Nginx passes it to the php-fpm service via the FastCGI protocol.
+4. Request Handling:
+ 4a. (Static Files): If the request is for a static asset like a CSS file or an image, Nginx serves it directly and the request is complete.
+ 4b. (PHP Files): If the request is for a .php file, Nginx passes it to the php-fpm service via the FastCGI protocol.
 
-### 5. Application & Data Logic:
-### 5a. (Database): The PHP code executes and communicates with the mysql container for any database operations.
-### 5b. (AWS Services): The PHP code communicates with the localstack container for any AWS calls, such as uploading a file to S3.
+5. Application & Data Logic:
+ 5a. (Database): The PHP code executes and communicates with the mysql container for any database operations.
+ 5b. (AWS Services): The PHP code communicates with the localstack container for any AWS calls, such as uploading a file to S3.
 
-### This entire process happens within the isolated Docker Swarm `overlay` network, simulating a private cloud VPC.
+This entire process happens within the isolated Docker Swarm `overlay` network, simulating a private cloud VPC.
 
 
 ## 2. Core Architecture Philosophy
