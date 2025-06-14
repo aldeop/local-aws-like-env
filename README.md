@@ -27,7 +27,7 @@ docker swarm init
 
 ### 2. Create Secret Files
 
-Create a files with a passwords (don't commit it to Git).
+Create a files with passwords (don't commit to Git).
 ```bash
 echo "yoursecretrootpassword" > db_root_password.txt
 echo "yoursecretdbpassword" > db_password.txt
