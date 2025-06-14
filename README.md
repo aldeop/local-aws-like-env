@@ -89,7 +89,9 @@ To check the status use command `docker service ls`.
 ### Scaling Services
 
 To scale manually the PHP-FPM service to 3 replicas run:
-``` docker service scale aws-env_php-fpm=3 ```
+```bash
+docker service scale aws-env_php-fpm=3
+```
 
 Traefik will automatically start load-balancing across all available replicas.
 
