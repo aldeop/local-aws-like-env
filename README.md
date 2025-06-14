@@ -21,41 +21,56 @@ cd aws-like-local-env
 
 ### 1a. Initialize Docker Swarm
 
-``` docker swarm init ```
+```bash
+docker swarm init
+```
 
 ### 2. Create Secret Files
 
 Create a files with a passwords (don't commit it to Git).
-``` echo "yoursecretrootpassword" > db_root_password.txt ```
-``` echo "yoursecretdbpassword" > db_password.txt ```
+```bash
+echo "yoursecretrootpassword" > db_root_password.txt
+echo "yoursecretdbpassword" > db_password.txt
+```
 
 Add the file to your .gitignore
-``` echo "db_root_password.txt" >> .gitignore ```
-``` echo "db_password.txt" >> .gitignore ```
+```bash
+echo "db_root_password.txt" >> .gitignore
+echo "db_password.txt" >> .gitignore 
+```
 
 ### 3. Create Docker Secrets
-
-``` docker secret create db_root_password db_root_password.txt ```
-``` docker secret create db_password db_password.txt ```
+```bash
+docker secret create db_root_password db_root_password.txt
+docker secret create db_password db_password.txt
+```
 
 ### 4. Generate SSL Certificate
 
 This step creates the trusted SSL certificate for local HTTPS (run one-time command per machine).
-``` mkcert -install ```
+```bash
+mkcert -install
+```
 
 Generate the certificate for our local domain
-``` mkcert -key-file traefik/certs/key.pem -cert-file traefik/certs/cert.pem "app.localhost" ```
+```bash
+mkcert -key-file traefik/certs/key.pem -cert-file traefik/certs/cert.pem "app.localhost"
+```
 
 ### 5. Build the Application Image
 
 Docker Swarm does not build images on deploy, so we should build application image first.
 The tag 'php-fpm-app:latest' should match the image name in the stack file
-``` docker build -t php-fpm-app:latest ./php ```
+```bash
+docker build -t php-fpm-app:latest ./php
+```
 
 ### 6. Deploy the Stack
 
 Deploy the entire stack to the Swarm. We'll name our stack `aws-env`.
-``` docker stack deploy -c docker-compose.yml aws-env ```
+```bash
+docker stack deploy -c docker-compose.yml aws-env
+```
 
 It may take few minutes for all services to start. 
 To check the status use command `docker service ls`.
