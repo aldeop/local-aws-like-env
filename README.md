@@ -13,8 +13,9 @@ You must have the following tools installed on your local machine:
 
 ### 1. Clone the Repository
 
-``` git clone https://github.com/aldeop/local-aws-like-env.git ```
-``` cd aws-like-local-env ```
+```bash
+ git clone https://github.com/aldeop/local-aws-like-env.git
+cd aws-like-local-env ```
 
 
 ### 1a. Initialize Docker Swarm
